@@ -51,11 +51,34 @@ void test_optional()
 
 void test_ptree()
 {
-	boost::property_tree::wptree t, t2;
-	t.put_value( 1.1 );
-	t.put_value( L"string value" );
-	t2.put_child( L"child1", t );
-	__fake_code_line();
+	{
+		boost::property_tree::wptree t, t2;
+		t.put_value( 1.1 );
+		t.put_value( L"string value" );
+		t2.put_child( L"child1", t );
+		__fake_code_line();
+	}
+	{
+		boost::property_tree::wptree tree;
+		boost::property_tree::wptree& root = tree.put( L"root", L"this is root" );
+
+		{
+			boost::property_tree::wptree& item1 = root.add( L"array_item", L"" );
+			item1.put( L"name", L"item1" );
+			item1.put( L"type", 2 );
+			__fake_code_line();
+		}
+		{
+			boost::property_tree::wptree& item2 = root.add( L"array_item", L"item2 value" );
+			item2.put( L"name", L"item1(2)" );
+
+			boost::property_tree::wptree item22;
+			item22.put_value( 2 );
+			item2.put_child( L"type", item22 );
+			__fake_code_line();
+		}
+		__fake_code_line();
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
