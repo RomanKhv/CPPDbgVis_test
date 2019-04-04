@@ -63,13 +63,13 @@ void test_ptree()
 		boost::property_tree::wptree& root = tree.put( L"root", L"this is root" );
 
 		{
-			boost::property_tree::wptree& item1 = root.add( L"array_item", L"" );
+			boost::property_tree::wptree& item1 = root.add( L"array_item", L"item1 value" );
 			item1.put( L"name", L"item1" );
 			item1.put( L"type", 2 );
 			__fake_code_line();
 		}
 		{
-			boost::property_tree::wptree& item2 = root.add( L"array_item", L"item2 value" );
+			boost::property_tree::wptree& item2 = root.add( L"array_item", L"" );
 			item2.put( L"name", L"item1(2)" );
 
 			boost::property_tree::wptree item22;
