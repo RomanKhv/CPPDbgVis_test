@@ -45,7 +45,20 @@ void test_SmartPointers()
 //////////////////////////////////////////////////////////////////////////
 
 void test_optional()
-{}
+{
+	std::cout << "\n--- optional ---\n";
+
+	boost::optional<int> o;
+	o = boost::none;
+	auto init = o.is_initialized();
+	std::cout << "is none: " << ((o == boost::none) ? "true" : "false)";
+	o.emplace( 7 );
+	std::cout << "is none: " << ((o == boost::none) ? "true" : "false");
+	init = o.is_initialized();
+
+	std::cout << o.value();
+	__fake_code_line();
+}
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -103,9 +116,12 @@ void test_signals()
 
 void test_variant()
 {
+	boost::variant<double> v1;
+	v1 = 1.1;
+
 	boost::variant<int,bool> v2;
-	v2 = 1;
-	_ASSERTE( boost::get<int>(v2) == 1 );
+	v2 = 2;
+	_ASSERTE( boost::get<int>(v2) == 2 );
 	v2 = true;
 	_ASSERTE( boost::get<bool>(v2) == true );
 
